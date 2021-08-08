@@ -261,9 +261,9 @@ for(let k in conf) {
       if(Array.isArray(slice_conf[k])) 
          slice_conf[k] = conf[k].split(/\s*,\s*/);
       else 
-         slice_conf[k] = typeof slice_conf[k] == "number" ? parseFloat(conf[k]) : conf[k];
+         slice_conf[k] = typeof slice_conf[k] == "number" ? parseFloat(conf[k]) : 
             typeof slice_conf[k] == "boolean" ? (conf[k]=="true" || parseInt(conf[k])==1 ? true : false) : conf[k];
-      //console.log(k,conf[k],parseInt(conf[k]),slice_conf[k])
+      //console.log(k,conf[k],parseInt(conf[k]),JSON.stringify(slice_conf[k]),typeof slice_conf[)
    } else if(typeof device_conf[k] !== 'undefined') {
       if(Array.isArray(device_conf[k])) {
          conf[k] = conf[k].replace(/\\n/g,"\n");
@@ -271,7 +271,7 @@ for(let k in conf) {
       } else
          device_conf[k] = typeof device_conf[k] == "number" ? parseFloat(conf[k]) : 
             typeof device_conf[k] == "boolean" ? (conf[k]=="true" || parseInt(conf[k])==1 ? true : false) : conf[k];
-      //console.log(k,conf[k],parseInt(conf[k]),device_conf[k])
+      //console.log(k,conf[k],parseInt(conf[k]),JSON.stringify(device_conf[k]))
    } else if(conf.verbose)
       console.log(`WARN: setting '${k}' doesn't fit to slice or device configuration`);
 }

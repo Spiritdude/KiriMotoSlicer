@@ -17,8 +17,8 @@ cube.gcode::
 	gcode2png --complete=50% --output=cube-bubbles-50%.png cube.gcode
 
 hollowCube.gcode::
-	../KiriMotoSlicer xyzHollowCalibrationCubeV2.stl --sliceSparseFill=0 -o hollowCube.gcode
-	gcode2png --complete=10% --output=hollowCubeKiriMoto-10%.png hollowCube.gcode
+	../KiriMotoSlicer xyzHollowCalibrationCubeV2.stl --sliceFillSparse=0 -o hollowCube.gcode
+	gcode2png --complete=20% --output=hollowCubeKiriMoto-20%.png hollowCube.gcode
 	gcode2png --complete=50% --output=hollowCubeKiriMoto-50%.png hollowCube.gcode
 	gcode2png --output=hollowCubeKiriMoto.png hollowCube.gcode
 
