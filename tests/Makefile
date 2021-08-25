@@ -1,4 +1,4 @@
-all::	cube.gcode hollowCube.gcode
+all::	cube.gcode cube-tip.gcode hollowCube.gcode
 
 cube.gcode::
 	../KiriMotoSlicer --sliceFillType=vase cube.stl
@@ -15,6 +15,10 @@ cube.gcode::
 	gcode2png --complete=50% --output=cube-linear-50%.png cube.gcode
 	../KiriMotoSlicer --sliceFillType=bubbles cube.stl
 	gcode2png --complete=50% --output=cube-bubbles-50%.png cube.gcode
+
+cube-tip.gcode::
+	../KiriMotoSlicer cube-tip.stl
+	../KiriMotoSlicer cube-tip.stl --sliceSupportEnable=true --sliceSupportAngle=30 -o cube-tip-support.gcode
 
 hollowCube.gcode::
 	../KiriMotoSlicer xyzHollowCalibrationCubeV2.stl --sliceFillSparse=0 -o hollowCube.gcode

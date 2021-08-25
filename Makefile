@@ -1,7 +1,9 @@
 APPNAME = KiriMotoSlicer
+BINNAME = kirimoto-slicer
 LIBNAME = kirimoto
-VERSION = 0.0.3
+VERSION = 0.0.5
 DEST_BIN = /usr/local/bin
+DEST_BIN = ${HOME}/bin/
 DEST_LIB = /usr/local/lib
 #DEST_LIB = ${HOME}/lib/js
 
@@ -19,7 +21,7 @@ install::
 	#sudo cp ${APPNAME} ${DEST_BIN}
 
 deinstall::
-	rm -f ${DEST_BIN}/${APPNAME}
+	rm -f ${DEST_BIN}/${BINNAME}
 	rm -f ${DEST_LIB}/${LIBNAME}
 
 tests::
@@ -30,7 +32,7 @@ clean::
 # -- devs only:
 
 edit::
-	${EDITOR} KiriMotoSlicer Makefile README.md LICENSE tests/Makefile
+	${EDITOR} kirimoto-slicer Makefile README.md LICENSE tests/Makefile
 
 change::
 	git commit -am "..."
