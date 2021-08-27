@@ -18,8 +18,7 @@ let APPNAME = 'KiriMotoSlicer';
 let VERSION = '0.0.5';
 let BINNAME = 'kirimoto-slicer';
 
-let ver = process.version;
-let v = ver.match(/^v(\d+\.)/)[1];
+let v = process.version.match(/^v(\d+\.)/)[1];
 v = parseFloat(v);
 if(v<=12) {
    console.log(`ERR: node version ${ver} is not sufficient to run ${APPNAME}, at least use 13.0 or later, abort.`);
