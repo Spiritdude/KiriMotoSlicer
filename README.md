@@ -1,6 +1,6 @@
 # KiriMotoSlicer
 
-KiriMotoSlicer is a CLI wrapper for Kiri:Moto web-based slicer, the code was based on the `src/kiri/cli.js` and further 
+KiriMotoSlicer is a CLI wrapper for **[Kiri:Moto](https://grid.space/kiri/)** web-based slicer, the code was based on the `src/kiri/cli.js` and further 
 extended to operate standalone as much node-based code allows it (NodeJS vs BrowserJS has become utterly messy to deal with).
 
 ## Download
