@@ -15,7 +15,7 @@
 // 'use strict'   // Note: we can't use 'strict' as some code should behave like in a browser :-| => lazy strictness
 
 let APPNAME = 'KiriMotoSlicer';
-let VERSION = '0.0.5';
+let VERSION = '0.0.6';
 let BINNAME = 'kirimoto-slicer';
 
 let v = process.version.match(/^v(\d+\.)/)[1];

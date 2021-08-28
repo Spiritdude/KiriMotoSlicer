@@ -1,10 +1,10 @@
 APPNAME = KiriMotoSlicer
 BINNAME = kirimoto-slicer
 LIBNAME = kirimoto
-VERSION = 0.0.5
+VERSION = 0.0.6
 DEST_BIN = /usr/local/bin
-DEST_BIN = ${HOME}/bin/
 DEST_LIB = /usr/local/lib
+#DEST_BIN = ${HOME}/bin/
 #DEST_LIB = ${HOME}/lib/js
 
 all::
@@ -18,7 +18,7 @@ requirements::
 
 install::
 	tar cf - grid-apps | ( sudo mkdir -p ${DEST_LIB}/${LIBNAME}; cd ${DEST_LIB}/${LIBNAME} && sudo tar xf - )
-	#sudo cp ${APPNAME} ${DEST_BIN}
+	sudo cp ${BINNAME} ${DEST_BIN}/
 
 deinstall::
 	rm -f ${DEST_BIN}/${BINNAME}
