@@ -48,7 +48,7 @@ let conf_options = {
 };
 
 let slice_conf = {
-  "sName":"Ender3_test",
+  "processName":"generic",
   "sliceHeight":0.25,
   "sliceShells":3,
   "sliceShellOrder":"in-out",
@@ -239,7 +239,7 @@ for(var i=0; i<args.length; i++) {              // parse arguments
 }
 
 if(conf.version) {
-   console.log(`${APPNAME} ${VERSION} (node ${process.version})`);
+   console.log(`${APPNAME} ${VERSION} (Kiri:Moto ???, node ${process.version})`);
    process.exit(0);
 }
 
@@ -457,6 +457,8 @@ for (let file of files) {
         if(conf.verbose) 
            console.log(`WARN: startup: ${fn} not found, ignored`);
     try {
+        if(conf.verbose>3) 
+            console.log(`INF: process ${fn} ...`);
         eval(fs.readFileSync(fn).toString());
     } catch (e) {
         // console.log({dir, file, e});
@@ -482,6 +484,8 @@ for (let file of files) {
 let kiri = self.kiri;
 let moto = self.moto;
 let engine = kiri.newEngine();
+
+//console.log(kiri.license)
 
 for(var i=0; i<fss.length; i++) {
    var fn = fss[i]
