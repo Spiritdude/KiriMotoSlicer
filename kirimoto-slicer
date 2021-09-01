@@ -238,11 +238,6 @@ for(var i=0; i<args.length; i++) {              // parse arguments
       fss.push(a)                               // no switch, then consider it as file to process
 }
 
-if(conf.version) {
-   console.log(`${APPNAME} ${VERSION} (Kiri:Moto ???, node ${process.version})`);
-   process.exit(0);
-}
-
 if(!fs.existsSync(conf.basedir)) {
    console.log(`ERR: basedir doesn't exist: ${conf.basedir}, do proper 'make install', abort.`);
    process.exit(-1);
@@ -290,15 +285,6 @@ for(let k in conf) {
    } else if(conf.verbose)
       console.log(`WARN: setting '${k}' doesn't fit to slice or device configuration`);
 }
-
-if(fss.length == 0 || conf.help)
-   help()
-
-console.log(`== ${APPNAME} ${VERSION} == https://github.com/Spiritdude/KiriMotorSlicer
-   based on Kiri:Moto https://github.com/GridSpace/grid-apps`);
-
-if(conf.verbose)
-   console.log({conf:conf})
 
 if(conf.setTemperature) {
    device_conf.gcodePre.push("\n; set temperatures",
@@ -435,6 +421,9 @@ function btoa(b) {
     return Buffer.from(b, 'base64').toString();
 }
 
+backup = console.log
+console.log = function() { }        // mute kiri startup messages
+
 for (let file of files) {
     let isPNG = file.indexOf("/pngjs") > 0;
     let isClip = file.indexOf("/clip") > 0;
@@ -448,7 +437,7 @@ for (let file of files) {
     if (swapMod) {
         module = { exports: {} };
     }
-    let clearMod = isPNG || isClip;
+    let clearMod = isPNG || isClip || file.indexOf("license") > 0;
     if (clearMod) {
         module = undefined;
     }
@@ -461,7 +450,7 @@ for (let file of files) {
             console.log(`INF: process ${fn} ...`);
         eval(fs.readFileSync(fn).toString());
     } catch (e) {
-        // console.log({dir, file, e});
+        //console.log({dir, file, e});
         if(conf.verbose)
             console.log({dir, file, e});
     }
@@ -481,11 +470,25 @@ for (let file of files) {
     }
 }
 
+console.log = backup
+
 let kiri = self.kiri;
 let moto = self.moto;
 let engine = kiri.newEngine();
 
-//console.log(kiri.license)
+if(conf.version) {
+   console.log(`${APPNAME} ${VERSION} (Kiri:Moto ${self.kiri.version}, node ${process.version})`);
+   process.exit(0);
+}
+
+if(fss.length == 0 || conf.help)
+   help()
+
+console.log(`== ${APPNAME} ${VERSION} (Kiri:Moto ${self.kiri.version}) == https://github.com/Spiritdude/KiriMotorSlicer
+   based on Kiri:Moto https://github.com/GridSpace/grid-apps`);
+
+if(conf.verbose)
+   console.log({conf:conf})
 
 for(var i=0; i<fss.length; i++) {
    var fn = fss[i]
