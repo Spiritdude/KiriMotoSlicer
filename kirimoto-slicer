@@ -438,7 +438,7 @@ for (let file of files) {
     if (swapMod) {
         module = { exports: {} };
     }
-    let clearMod = isPNG || isClip || file.indexOf("license") > 0;
+    let clearMod = isPNG || isClip;
     if (clearMod) {
         module = undefined;
     }
@@ -478,14 +478,14 @@ let moto = self.moto;
 let engine = kiri.newEngine();
 
 if(conf.version) {
-   console.log(`${APPNAME} ${VERSION} (Kiri:Moto ${self.kiri.version}, node ${process.version})`);
+   console.log(`${APPNAME} ${VERSION} (Kiri:Moto ${kiri.version}, node ${process.version})`);
    process.exit(0);
 }
 
 if(fss.length == 0 || conf.help)
    help()
 
-console.log(`== ${APPNAME} ${VERSION} (Kiri:Moto ${self.kiri.version}) == https://github.com/Spiritdude/KiriMotorSlicer
+console.log(`== ${APPNAME} ${VERSION} (Kiri:Moto ${kiri.version}) == https://github.com/Spiritdude/KiriMotorSlicer
    based on Kiri:Moto https://github.com/GridSpace/grid-apps`);
 
 if(conf.verbose)
