@@ -5,6 +5,7 @@
  *    written by Rene K. Mueller, based on cli.js by Stewart Allen
  *
  * History:
+ * 2021/09/01: 0.0.6: retrieving version fixed (from license.js), mute kiri startup
  * 2021/08/16: 0.0.5: renamed KiriMotoSlicer to kirimoto-slicer
  * 2021/08/08: 0.0.4: -h <term> or --help=<term> to query settings
  * 2021/08/08: 0.0.3: supporting --bedOrigin=<x>,<y> use with --outputOriginCenter=true
