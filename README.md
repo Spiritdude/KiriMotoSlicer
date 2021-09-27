@@ -151,10 +151,8 @@ KiriMotoSlicer 0.0.5 USAGE: [<options>] [file] ...
 
 ```
 
-More information & details see [3D Printing: Kiri:Moto CLI Slicer](https://xyzdims.com/2021/08/27/3d-printing-kirimoto-cli-slicer/) how to use it.
-
 ## Configurations
-You can save a configuration in a file (e.g. `my.conf`):
+You can save a configuration in a file (e.g. `myprinter.conf`):
 ```
 # is a comment
 sliceHeight = 0.25
@@ -162,11 +160,15 @@ sliceLineWidth = 0.45
 ```
 and then reference it
 ```
-kirimoto-slicer -l my.conf test.stl
+kirimoto-slicer -l myprinter.conf test.stl
 ```
 
-You can also load multiple configurations cumulatively.
+You can also load multiple configurations cumulatively, e.g. `kirimoto-slicer -l myprinter.conf -l pla.conf ...`
 
 ## Todo
 - `--sliceFillType=vase` and `bubbles` are listed, but seem not supported
+
+## See Also
+- [3D Printing: Kiri:Moto CLI Slicer](https://xyzdims.com/2021/08/27/3d-printing-kirimoto-cli-slicer/), more details
+
 
