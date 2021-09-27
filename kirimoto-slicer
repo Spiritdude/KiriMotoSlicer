@@ -485,7 +485,7 @@ if(conf.version) {
 if(fss.length == 0 || conf.help)
    help()
 
-console.log(`== ${APPNAME} ${VERSION} (Kiri:Moto ${kiri.version}, node ${process.version}) == https://github.com/Spiritdude/KiriMotorSlicer
+console.log(`== ${APPNAME} ${VERSION} (Kiri:Moto ${kiri.version}, node ${process.version}) == https://github.com/Spiritdude/KiriMotoSlicer
    based on Kiri:Moto https://github.com/GridSpace/grid-apps`);
 
 if(conf.verbose)
