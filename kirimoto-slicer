@@ -516,6 +516,8 @@ function help() {
       -v or -vvv                       \"       \"
       --output=<fn>                 force output filename
       -o <fn>                          \"       \"
+      --load=<conf>                 load configuration (lines of <k>=<v>, or experimental JSON as grid-apps/src/dev/*)
+      -l <conf>                              \"                \"                      \"
       --setTemperature=<s>          include set temperature extruder & bed in gcodePre (default: `+JSON.stringify(conf.setTemperature)+`)
       --bedOrigin=<x>,<y>           set origin of bed (use with --outputOriginCenter=true) (default: `+JSON.stringify(conf.bedOrigin)+`)
 `);

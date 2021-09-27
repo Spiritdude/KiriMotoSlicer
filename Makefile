@@ -1,7 +1,7 @@
 APPNAME = KiriMotoSlicer
 BINNAME = kirimoto-slicer
 LIBNAME = kirimoto
-VERSION = 0.0.6
+VERSION = 0.0.7
 DEST_BIN = /usr/local/bin
 DEST_LIB = /usr/local/lib
 #DEST_BIN = ${HOME}/bin/

@@ -28,6 +28,8 @@ KiriMotoSlicer 0.0.5 USAGE: [<options>] [file] ...
       -v or -vvv                       "       "
       --output=<fn>                 force output filename
       -o <fn>                          "       "
+      --load=<conf>                 load configuration (lines of <k>=<v>, or experimental JSON as grid-apps/src/dev/*)
+      -l <conf>                              "                "                      "
       --setTemperature=<s>          include set temperature extruder & bed in gcodePre (default: true)
       --bedOrigin=<x>,<y>           set origin of bed (use with --outputOriginCenter=true) (default: [0,0])
 
