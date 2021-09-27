@@ -5,6 +5,7 @@
  *    written by Rene K. Mueller, based on cli.js by Stewart Allen
  *
  * History:
+ * 2021/09/27: 0.0.7: -l supports also JSON of format as in src/dev/*
  * 2021/09/01: 0.0.6: retrieving version fixed (from license.js), mute kiri startup
  * 2021/08/16: 0.0.5: renamed KiriMotoSlicer to kirimoto-slicer
  * 2021/08/08: 0.0.4: -h <term> or --help=<term> to query settings
@@ -16,7 +17,7 @@
 // 'use strict'   // Note: we can't use 'strict' as some code should behave like in a browser :-| => lazy strictness
 
 let APPNAME = 'KiriMotoSlicer';
-let VERSION = '0.0.6';
+let VERSION = '0.0.7';
 let BINNAME = 'kirimoto-slicer';
 
 let v = process.version.match(/^v(\d+\.)/)[1];
@@ -190,7 +191,7 @@ let device_conf = {
 for(var i=0; i<args.length; i++) {              // parse arguments
    let a = args[i]
    let m
-   m = a.match(/--([\w\-\.]+)$/)                // --<k>
+   m = a.match(/^--([\w\-\.]+)$/)                // --<k>
    if(m && m[1]) {
       let a = m[1]
       if(typeof conf[a] === "undefined")
@@ -198,7 +199,7 @@ for(var i=0; i<args.length; i++) {              // parse arguments
       conf[a]++
       continue
    }
-   m = a.match(/-([\w]+)$/);                    // -<k>
+   m = a.match(/^-([\w]+)$/);                    // -<k>
    if(m && m[1]) {
       for(k of m[1].split('')) {
          let kf = s2l[k]
@@ -206,7 +207,7 @@ for(var i=0; i<args.length; i++) {              // parse arguments
             console.log(`WARN: unknown short switch '${k}', ignored`);
             continue
          }
-         if(typeof conf[kf] === "undefined")    // already set?
+         if(typeof conf[kf] === "undefined" && a2a[k] === "undefined")    // not already set and no additional argument?
             conf[kf] = 0
          if(typeof a2a[k] !== "undefined")      // short key takes additional argument?
             if(kf == 'load')
@@ -218,7 +219,7 @@ for(var i=0; i<args.length; i++) {              // parse arguments
       }
       continue
    }
-   m = a.match(/--([\w\-\.]+)=(.*)/)          // --<k>=<v>
+   m = a.match(/^--([\w\-\.]+)=(.*)/)          // --<k>=<v>
    if(m && m[1]) {                            // don't test m[2] as it can be empty
       let k = m[1]
       let v = m[2]
@@ -573,21 +574,41 @@ function load_conf(fn) {
          console.log(`INF: load configuration <${fn}>`)
       let t = fs.readFileSync(fn)
       t = t.toString()
-      let ln = 0;
-      for(l of t.split(/\n/)) {
-         let m = l.match(/^\s*#/)
-         ln++
-         if(m) 
-            continue
-         if(conf.verbose>1)
-            console.log("INF:",fn,">>",l)
-         m = l.match(/^\s*(\w+)\s*=\s*(\S.*)/)
-         if(m && m[1] && m[2]) {
-            conf[m[1]] = m[2]
-            if(conf.verbose) 
-               console.log(`INF: ${fn}: ${m[1]} = ${m[2]}`)
-         } else if(l.match(/\S/))
-            console.log(`WARN: ${fn} #${ln}: could not parse '${l}', skipped`)
+      if(t.match(/^\s*\{/)) {        // is JSON
+         d = JSON.parse(t);
+         if(d['pre']) 
+            conf.gcodePre = d['pre'].join("\n")
+         if(d['post']) 
+            conf.gcodePost = d['post'].join("\n")
+         if(d['extruders']) 
+            for(e in d.extruders)
+               for(k in d.extruders[e])
+                  conf['extruders.'+e+'.'+k] = d.extruders[e][k]
+         if(d['settings'])
+            for(e in d.settings)     // object
+               conf[e] = d.settings[e]
+         if(d['profiles'])    
+            for(p of d.profiles)     // array
+               for(k in p)
+                  conf[k] = p[k]
+         // FIXME: support 'cmd' key as well
+      } else {                       // is line-wise <k> = <v>
+         let ln = 0;
+         for(l of t.split(/\n/)) {
+            let m = l.match(/^\s*#/)
+            ln++
+            if(m) 
+               continue
+            if(conf.verbose>1)
+               console.log("INF:",fn,">>",l)
+            m = l.match(/^\s*(\w+)\s*=\s*(\S.*)/)
+            if(m && m[1] && m[2]) {
+               conf[m[1]] = m[2]
+               if(conf.verbose) 
+                  console.log(`INF: ${fn}: ${m[1]} = ${m[2]}`)
+            } else if(l.match(/\S/))
+               console.log(`WARN: ${fn} #${ln}: could not parse '${l}', skipped`)
+         }
       }
    } else
       console.log(`WARN: configuration ${fn} is not accessible, disregarded`)
