@@ -32,7 +32,7 @@ KiriMotoSlicer 0.0.5 USAGE: [<options>] [file] ...
       --bedOrigin=<x>,<y>           set origin of bed (use with --outputOriginCenter=true) (default: [0,0])
 
    slice configuration:
-      --sName=<v>                   set s name (default: "Ender3_test")
+      --processName=<v>             set process name (default: "generic")
       --sliceHeight=<v>             set slice height (default: 0.25)
       --sliceShells=<v>             set slice shells (default: 3)
       --sliceShellOrder=<v>         set slice shell order ["in-out","out-in"] (default: "in-out")
